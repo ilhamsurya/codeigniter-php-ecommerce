@@ -12,37 +12,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 </head>
 <body>
- 
-    <div class="container mt-5 mb-5 text-center">
+
+<div class="container p-5">
     <a href="<?= base_url('mahasiswa');?>" class="btn btn-secondary mb-2">Kembali</a>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4 class="card-title">Detail Mahasiswa : <?= $mahasiswa->nim;?></h4>
+        </div>
+        <div class="card-body">
+            <form method="post" action="<?= base_url('mahasiswa/update');?>">
+              <div class="form-group">
+              <h5 class="">Nim Mahasiswa : <?= $mahasiswa->nim;?></h4>
+                </div>
+                <div class="form-group">
+                <h5 class="">Nama Mahasiswa : <?= $mahasiswa->nama;?></h4>
+                </div>
+         
+                <div class="form-group">
+                <h5 class="">Umur Mahasiswa : <?= $mahasiswa->umur;?></h4>
+                </div>
+           
+  
+   
+            </form>
+            
+        </div>
     </div>
-    <div class="container">
-        <h4>Form Tambah Mahasiswa</h4>
-        <hr>
-        <form method="post" action="<?= base_url('mahasiswa/add');?>">
-            <div class="form-group">
-                    <label for="">NIM Mahasiswa</label>
-                    <input type="text" name="nim" class="form-control" placeholder="Nim Mahasiswa">
-            </div>
-            <div class="form-group">
-                <label for="">Nama Mahasiswa</label>
-                <input type="text" name="nama" class="form-control" placeholder="Nama Mahasiswa">
-            </div>
-            <div class="form-group">
-                <label for="">Umur Mahasiswa</label>
-                <input type="number"name="umur" class="form-control" placeholder="Umur Mahasiswa"></textarea>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-        </form>
-    </div>
-     
+</div>
+    
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
-</html> 
-
-
+</html>
 <?= $this->endSection() ?>

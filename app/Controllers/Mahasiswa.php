@@ -7,7 +7,7 @@ use App\Models\m_mahasiswa;
 	class Mahasiswa extends BaseController{
 		public function __construct() {
 
-			// Mendeklarasikan class ProductModel menggunakan $this->product
+		
 			$this->model = new m_mahasiswa();
 	
 		}
@@ -37,7 +37,7 @@ use App\Models\m_mahasiswa;
 			);
 			$model->saveMahasiswa($data);
 			echo '<script>
-					alert("Sukses Tambah Data Barang");
+					alert("Sukses Tambah Data Mahasiswa");
 					window.location="'.base_url('mahasiswa').'"
 				</script>';
 	
@@ -55,7 +55,25 @@ use App\Models\m_mahasiswa;
 			}else{
 
 				echo '<script>
-						alert("ID barang '.$id.' Tidak ditemukan");
+						alert("ID mahasiswa '.$id.' Tidak ditemukan");
+						window.location="'.base_url('mahasiswa').'"
+					</script>';
+			}
+		}
+
+		public function detail($id)
+		{
+			$model = new m_mahasiswa;
+			$mahasiswa = $model->getMahasiswa($id)->getRow();
+			if(isset($mahasiswa))
+			{
+				$data['mahasiswa'] = $mahasiswa;
+				$data['title']  = 'Detail '.$mahasiswa->nim;
+				echo view('v_detail_mahasiswa', $data);
+			}else{
+
+				echo '<script>
+						alert("ID mahasiswa '.$id.' Tidak ditemukan");
 						window.location="'.base_url('mahasiswa').'"
 					</script>';
 			}
@@ -73,12 +91,12 @@ use App\Models\m_mahasiswa;
 			);
 			$model->editMahasiswa($data,$id);
 			echo '<script>
-					alert("Sukses Edit Data Barang");
+					alert("Sukses Edit Data Mahasiswa");
 					window.location="'.base_url('mahasiswa').'"
 				</script>';
 		}
 
-		public function hapus($id)
+		public function delete($id)
 		{
 		
 			$model = new m_mahasiswa;
@@ -87,7 +105,7 @@ use App\Models\m_mahasiswa;
 			{
 				$model->deleteMahasiswa($id);
 				echo '<script>
-						alert("Hapus Data Barang Sukses");
+						alert("Hapus Data Mahasiswa Sukses");
 						window.location="'.base_url('mahasiswa').'"
 					</script>';
 	

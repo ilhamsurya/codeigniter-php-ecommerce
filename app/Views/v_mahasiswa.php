@@ -26,7 +26,7 @@
         <input name="search" id="search" type="text" placeholder="Masukan Nama">
         <input id="submit" type="submit" value="Search">
     </form>
-    <a href="<?php echo base_url('mahasiswa/tambah'); ?>" class="btn btn-success float-right mb-3">Tambah Produk</a>
+    <a href="<?php echo base_url('mahasiswa/tambah'); ?>" class="btn btn-success float-right mb-3">Tambah Mahasiswa</a>
         <div class="table-responsive">
     <table class="table table-striped">
         <tr>
@@ -43,8 +43,12 @@
             <td><?= $mhs->nim ?></td>
             <td><?= $mhs->nama ?></td>
             <td><?= $mhs->umur?></td>
-            <td><a  href="<?php echo base_url(); ?>/mahasiswa/edit/">Edit</a>&nbsp;
-          
+            <td>
+            <a  class="btn btn-primary" href="/mahasiswa/detail/<?=$mhs->nim?>">View</a>
+            <a  class="btn btn-warning" href="/mahasiswa/edit/<?=$mhs->nim?>">Edit</a>
+            <a  class="btn btn-danger" href="/mahasiswa/delete/<?=$mhs->nim?>">Delete</a>
+            </td>
+
         </tr>
         <?php  $no++;} ?>
     </table>

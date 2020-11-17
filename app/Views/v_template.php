@@ -12,7 +12,8 @@
     <tr height="50">
         <td bgcolor="#f0ffff" align="center"><a href="/home"> HOME</a> |
             <a href="/berita"> BERITA </a> |
-            <a href="/mahasiswa"> MAHASISWA </a>
+            <a href="/mahasiswa"> MAHASISWA </a> |
+            <a href="/logout"> LOGOUT </a>
             </td>
     </tr>
     <tr height="200">

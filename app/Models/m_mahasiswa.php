@@ -38,9 +38,7 @@ use CodeIgniter\Model;
     
         public function editMahasiswa($data,$id)
         {
-            $builder = $this->db->table($this->table);
-            $builder->where('nim', $id);
-            return $builder->update($data);
+            return $this->db->table($this->table)->update($data, ['nim' => $id]);
         }
 
      

@@ -21,11 +21,15 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
-$routes->get('/', 'mahasiswa::index');
-$routes->get('/home', 'c_home::tampil');
-$routes->get('/berita', 'c_berita::tampil');
-$routes->get('/mahasiswa', 'Mahasiswa::index');
-$routes->get('/mahasiswa/add', 'Mahasiswa::add');
+$routes->get('/', 'mahasiswa::index',['filter' => 'auth']);
+$routes->get('/home', 'c_home::tampil', ['filter' => 'auth']);
+$routes->get('/berita', 'c_berita::tampil', ['filter' => 'auth']);
+$routes->get('/mahasiswa', 'Mahasiswa::index', ['filter' => 'auth']);
+$routes->get('/mahasiswa/add', 'Mahasiswa::add', ['filter' => 'auth']);
+$routes->get('/login', 'Login::index');
+$routes->get('/login/auth', 'Login::auth');
+$routes->get('/logout', 'Login::logout');
+$routes->get('/register', 'Register::index');
 $routes->get('search','Mahasiswa::search');
 
 /**

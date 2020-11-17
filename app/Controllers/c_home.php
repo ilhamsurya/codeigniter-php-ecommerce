@@ -4,7 +4,9 @@ use CodeIgniter\Controller;
 
 class c_home extends Controller{
     public function tampil(){
-        return view('v_home');
+        $session = session();
+        echo "Welcome back, ".$session->get('user_name');
+        
     }
 }
 ?>

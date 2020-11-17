@@ -17,5 +17,6 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <h2 style = "text-align:center;">Home</h2>
+
 </div>
 <?= $this->endSection() ?>
