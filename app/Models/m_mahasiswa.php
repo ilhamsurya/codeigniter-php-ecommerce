@@ -6,13 +6,12 @@ use CodeIgniter\Model;
 
 		protected $table = 'mahasiswa';
 		protected $primaryKey='id_mahasiswa';
-		protected $allowedFields = ['nim', 'nama', 'umur'];
+		protected $allowedFields = ['nim', 'nama', 'umur', 'foto'];
     	public $nim;
     	public $nama;
     	public $umur;
-    
+        public $foto;
 
-        
 
         
         public function getMahasiswa($id = false)

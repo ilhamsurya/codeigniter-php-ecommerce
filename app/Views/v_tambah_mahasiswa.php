@@ -21,12 +21,16 @@
         <hr>
         <form method="post" action="<?= base_url('mahasiswa/add');?>">
             <div class="form-group">
-                    <label for="">NIM Mahasiswa</label>
-                    <input type="text" name="nim" class="form-control" placeholder="Nim Mahasiswa">
+                <label for="">NIM Mahasiswa</label>
+                <input type="text" name="nim" class="form-control" placeholder="Nim Mahasiswa">
             </div>
             <div class="form-group">
                 <label for="">Nama Mahasiswa</label>
                 <input type="text" name="nama" class="form-control" placeholder="Nama Mahasiswa">
+            </div>
+            <div class="form-group">
+                <label for="">Foto Mahasiswa</label>
+                <input type="file" name="file_upload" class="form-control" > 
             </div>
             <div class="form-group">
                 <label for="">Umur Mahasiswa</label>

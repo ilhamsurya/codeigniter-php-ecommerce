@@ -16,7 +16,8 @@ use App\Models\m_mahasiswa;
 			$mhsModel= new m_mahasiswa();
 			$data = [
             'title' => 'Tugas Nomor 3',
-            'mahasiswa' => $mhsModel->getMahasiswa(),
+            'mahasiswa' => $mhsModel->paginate(2),
+            'pager' => $mhsModel->pager
         ];
         return view('v_mahasiswa',$data);
 		}

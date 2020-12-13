@@ -22,7 +22,7 @@
     <title><?= $title ?></title>
 </head>
 <body>
-    <form action="<?php echo base_url('search'); ?>" method="GET">
+    <form action="<?php echo base_url('search'); ?>" method="POST">
         <input name="search" id="search" type="text" placeholder="Masukan Nama">
         <input id="submit" type="submit" value="Search">
     </form>
@@ -37,21 +37,21 @@
             <th>Aksi</th>
            
         </tr>
-        <?php  $no=1; foreach ($mahasiswa as $mhs) { ?>
+        <?php  foreach ($mahasiswa as $no => $mhs) { ?>
         <tr>
-            <td><?= $no;?></td>
-            <td><?= $mhs->nim ?></td>
-            <td><?= $mhs->nama ?></td>
-            <td><?= $mhs->umur?></td>
+            <td><?= $no+1;?></td>
+            <td><?= $mhs['nim'] ?></td>
+            <td><?= $mhs['nama'] ?></td>
+            <td><?= $mhs['umur']?></td>
             <td>
-            <a  class="btn btn-primary" href="/mahasiswa/detail/<?=$mhs->nim?>">View</a>
-            <a  class="btn btn-warning" href="/mahasiswa/edit/<?=$mhs->nim?>">Edit</a>
-            <a  class="btn btn-danger" href="/mahasiswa/delete/<?=$mhs->nim?>">Delete</a>
+            <a class="btn btn-primary" href="/mahasiswa/detail/<?=$mhs['nim']?>">View</a>
+            <a class="btn btn-warning" href="/mahasiswa/edit/<?=$mhs['nim']?>">Edit</a>
+            <a class="btn btn-danger" href="/mahasiswa/delete/<?=$mhs['nim']?>">Delete</a>
             </td>
-
         </tr>
         <?php  $no++;} ?>
     </table>
+    <?= $pager->links() ?>
 
  
  
