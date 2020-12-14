@@ -13,7 +13,7 @@ class m_barang extends Model{
      {
         if($id === false){
         $db = \Config\Database::connect();
-        $sql = 'SELECT id_barang,nama_barang,kategori,deskripsi,harga,stok,gambar FROM '.$this->table;
+        $sql = 'SELECT id_barang,nama_barang,kategori,deskripsi,harga,stok,gambar,berat FROM '.$this->table;
         $query = $db->query($sql);
         $results = $query->getResult();
         return $results;

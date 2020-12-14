@@ -15,7 +15,6 @@ use App\Models\m_barang;
          $data = [
             'title' => 'Tugas Nomor 3',
             'barang' => $this->ModelBarang->getBarang(),
-            'cart' => \Config\Services::cart(),
          ];
          return view('v_barang',$data);
       }
@@ -24,11 +23,11 @@ use App\Models\m_barang;
       {
          $data = [
          'title' => 'Tugas Nomor 3',
-         'barang' => $this->ModelBarang->getBarang(),
          'cart' => \Config\Services::cart(),
          ];
          return view('v_keranjang',$data);
       }
+      
       public function tambah()
       {
          return view('v_tambah_barang');
@@ -45,10 +44,11 @@ use App\Models\m_barang;
          'deskripsi' => $this->request->getPost('deskripsibarang'),
          'kategori' => $this->request->getPost('kategoribarang'),
          'harga' => $this->request->getPost('hargabarang'),
+         'berat' => $this->request->getPost('beratbarang'),
          'stok' => $this->request->getPost('stokbarang'),
          );
          $model->saveBarang($data);
-         return view('v_tambah_barang');
+         return view('v_barang');
 
        }
 
@@ -63,24 +63,47 @@ use App\Models\m_barang;
 
       function beli()
       {
-
          $cart = \Config\Services::cart();
+        
           $cart->insert(array(
           'id' => $this->request->getPost('id'),
           'qty' => 1,
           'price' => $this->request->getPost('price'),
           'name' => $this->request->getPost('name'),
-          'options' => array('gambar' => $this->request->getPost('gambar'))
+          'options' => array('gambar' => $this->request->getPost('gambar'),
+          'berat' => $this->request->getPost('berat'), )
           ));
          session()->setFlashdata('pesan', 'Barang masuk ke keranjang');
          return redirect()->to(base_url('barang'));
       }
-      function hapus()
-      {
 
-      $cart = \Config\Services::cart();
-      $cart->destroy();
-      redirect('barang');
+      public function delete_all()
+      {
+         $cart = \Config\Services::cart();
+         $cart->destroy();
+         redirect('barang');
+      }
+      public function delete($id)
+      {
+         $cart = \Config\Services::cart();
+         $cart->remove($id);
+         session()->setFlashdata('pesan', 'Barang dihapus dari keranjang');
+         return redirect()->to(base_url('barang/keranjang'));
+      }
+
+      public function update()
+      {
+           $cart = \Config\Services::cart();
+           $i = 1;
+           foreach($cart->contents() as $key => $value){
+               $cart->update(array(
+               'rowid' => $value['rowid'],
+               'qty' => $this->request->getPost('qty' . $i++),
+               ));
+           }
+              session()->setFlashdata('pesan', 'Barang berhasil diupdate');
+              return redirect()->to(base_url('barang/keranjang'));
+       
       }
 
       public function tampil_cart()

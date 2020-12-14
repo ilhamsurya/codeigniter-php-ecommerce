@@ -46,7 +46,16 @@
                     <h2 class="section-title">
                         <div class="logo">
                         </div> Barang Section
-
+                        <?php
+                        if(session()->getFlashdata('pesan')){
+                            echo '<div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="true">
+                                   &times;
+                                </button>';
+                            echo session()->getFlashdata('pesan');
+                            echo '</div>';
+                        }
+                         ?>
                     </h2>
                     <p class="lead">Menampilkan Daftar Barang</p>
 
@@ -56,44 +65,35 @@
                 <?php foreach ($barang as $key => $row) {?>
                 <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
                     <?php
-                        if(session()->getFlashdata('pesan')){
-                            echo '<div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="true">
-                                   &times;
-                                </button>';
-                            echo session()->getFlashdata('pesan');
-                            echo '</div>';
-                        }
-                    
-                         ?>
-                    <?php
                      echo form_open('barang/beli');
                      echo form_hidden('id', $row->id_barang);
                      echo form_hidden('price', $row->harga);
                      echo form_hidden('name', $row->nama_barang);
                      echo form_hidden('gambar', $row->gambar);
-                     //echo form_hidden('berat', $value['berat']);
+                     echo form_hidden('berat', $row->berat);
+                     echo form_hidden('stok', $row->stok);
                      ?>
 
-                    <a href="#"><img class="img-thumbnail" src="<?=base_url('assets/images/'.$row->gambar);?>" /></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="#"><?=$row->nama_barang?></a>
-                        </h4>
+                    <img class="img-thumbnail" src="<?=base_url('assets/images/'.$row->gambar);?>" />
+                    <h2><a href="#"><?=$row->nama_barang?></a></h2>
+                    <p>
                         <h5>Rp. <?php echo number_format($row->harga,0,",",".");?></h5>
-                        <p><?=$row->deskripsi?></p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="<?php echo base_url();?>barang/detail_produk/<?php echo $row->id_barang;?>"
-                            class="btn btn-sm btn-default"><i class="glyphicon glyphicon-search"></i> Detail</a>
-                        <button type="submit" class="btn btn-sm btn-success"><i
-                                class="glyphicon glyphicon-shopping-cart"></i> Beli</button>
-                    </div>
+                        <h5><?php echo number_format($row->berat,0,",",".");?> Kg</h5>
+                    </p>
+                    <a href="<?php echo base_url();?>barang/detail_produk/<?php echo $row->id_barang;?>"
+                        class="btn btn-sm btn-default"><i class="glyphicon glyphicon-search"></i> Detail</a>
+                    <button type="submit" class="btn btn-sm btn-success"><i
+                            class="glyphicon glyphicon-shopping-cart"></i> Beli</button>
+
                     <?php form_close(); ?>
                 </div>
+
+
             </div>
-            <?php }?>
         </div>
+    </div>
+    <?php }?>
+    </div>
 
     </div>
     </div>

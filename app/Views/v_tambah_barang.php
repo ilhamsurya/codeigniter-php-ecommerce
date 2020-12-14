@@ -46,6 +46,10 @@
                 <input type="number" name="hargabarang" class="form-control" placeholder="harga barang (RP)">
             </div>
             <div class="form-group">
+                <label for="">Berat</label>
+                <input type="number" name="beratbarang" class="form-control" placeholder="berat barang (KG)">
+            </div>
+            <div class="form-group">
                 <label for="">Stok</label>
                 <input type="number" name="stokbarang" class="form-control" placeholder="stok barang">
             </div>
