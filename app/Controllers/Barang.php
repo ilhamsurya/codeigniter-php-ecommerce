@@ -12,9 +12,10 @@ use App\Models\m_barang;
 
 	   public function index()
 	   {
+         $ModelBarang= new m_barang();
          $data = [
             'title' => 'Tugas Nomor 3',
-            'barang' => $this->ModelBarang->getBarang(),
+            'barang' => $ModelBarang->getBarang(),
          ];
          return view('v_barang',$data);
       }
@@ -73,8 +74,7 @@ use App\Models\m_barang;
           'options' => array('gambar' => $this->request->getPost('gambar'),
           'berat' => $this->request->getPost('berat'), )
           ));
-         session()->setFlashdata('pesan', 'Barang masuk ke keranjang');
-         return redirect()->to(base_url('barang'));
+    
       }
 
       public function delete_all()

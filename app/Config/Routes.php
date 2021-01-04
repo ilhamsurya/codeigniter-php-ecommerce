@@ -30,6 +30,8 @@ $routes->get('/barang', 'Barang::index');
 $routes->get('/barang/tambah', 'Barang::tambah', ['filter' => 'auth']);
 $routes->get('/barang/add', 'Barang::add', ['filter' => 'auth']);
 $routes->get('/barang/keranjang', 'Barang::keranjang', ['filter' => 'auth']);
+$routes->get('/barang/checkout', 'Cart::checkout', ['filter' => 'auth']);
+$routes->get('/cart/detail', 'Cart::detail', ['filter' => 'auth']);
 $routes->get('/login', 'Login::index');
 $routes->get('/login/auth', 'Login::auth');
 $routes->get('/logout', 'Login::logout');
