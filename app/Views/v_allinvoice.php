@@ -18,6 +18,8 @@
                 <th>Nama Pemesan</th>
                 <th>Nomor HP</th>
                 <th>Alamat Pengiriman</th>
+                <th>Kecamtan Pengiriman</th>
+                <th>Kota Pengiriman</th>
                 <th>Tanggal Pemesanan</th>
                 <th>Aksi</th>
 
@@ -25,7 +27,7 @@
             <?php  foreach ($order as $no => $value) { ?>
 
             <td>
-                <?=$value->id_order?>
+                <?=$value->id_penjualan?>
             </td>
             <td>
                 <?=$value->nama?>
@@ -40,11 +42,19 @@
 
             </td>
             <td>
+                <?=$value->kecamatan?>
+
+            </td>
+            <td>
+                <?=$value->kota_tujuan?>
+
+            </td>
+            <td>
                 <?=$value->tanggal?>
 
             </td>
             <td>
-                <a class="btn btn-primary" href="/cart/detail/<?=$value->id_order?>">View</a>
+                <a class="btn btn-primary" href="/cart/detail/<?=$value->id_penjualan?>">View</a>
 
             </td>
 

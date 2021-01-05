@@ -33,7 +33,18 @@ if ($keranjang = $cart->contents())
                 <input type="tel" class="form-control" name="telp" id="telp" placeholder="No Telp">
             </div>
         </div>
-
+        <div class="form-group  has-success has-feedback">
+            <label class="control-label col-xs-3" for="phoneNumber">Kecamatan:</label>
+            <div class="col-xs-9">
+                <input type="tel" class="form-control" name="kecamatan" id="kecamatan" placeholder="Nama Kecamatan">
+            </div>
+        </div>
+        <div class="form-group  has-success has-feedback">
+            <label class="control-label col-xs-3" for="phoneNumber">Kota Tujuan:</label>
+            <div class="col-xs-9">
+                <input type="tel" class="form-control" name="kota_tujuan" id="kota_tujuan" placeholder="kota_tujuan">
+            </div>
+        </div>
 
         <div class="form-group  has-success has-feedback">
             <div class="col-xs-offset-3 col-xs-9">

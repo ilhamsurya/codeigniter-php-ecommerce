@@ -2,15 +2,16 @@
 
 use CodeIgniter\Model;
 
-	class m_detailorder extends Model{
+	class m_jual extends Model{
 
-		protected $table = 'tbl_detail_order';
+		protected $table = 'tbl_jual';
 		protected $primaryKey='id';
-		protected $allowedFields = ['id_order','id_brg', 'nama_brg', 'qty', 'harga'];
+		protected $allowedFields = ['id_penjualan','id_brg', 'nama_brg', 'jml_jual', 'total'];
+    	public $id_penjualan;
     	public $id_brg;
     	public $nama_brg;
-    	public $qty;
-        public $harga;
+        public $jml_jual;
+        public $total;
 
 
         
@@ -18,12 +19,12 @@ use CodeIgniter\Model;
         {
             if($id === false){
                 $db = \Config\Database::connect();
-                $sql = 'SELECT id_order,id_brg,nama_brg,telp,harga FROM '.$this->table;
+                $sql = 'SELECT id_penjualan,id_brg,nama_brg,jml_jual,total FROM '.$this->table;
                 $query = $db->query($sql);
                 $results = $query->getResult();
                 return $results;
             }else{
-                return $this->getWhere(['id_order' => $id]);
+                return $this->asArray()->where(['id_penjualan' => $id])->get();
             }   
         }
 

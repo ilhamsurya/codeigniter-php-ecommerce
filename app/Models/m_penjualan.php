@@ -2,11 +2,11 @@
 
 use CodeIgniter\Model;
 
-	class m_order extends Model{
+	class m_penjualan extends Model{
 
-		protected $table = 'tbl_order';
-		protected $primaryKey='id_order';
-		protected $allowedFields = ['nama', 'alamat', 'telp', 'tanggal'];
+		protected $table = 'tbl_penjualan';
+		protected $primaryKey='id_penjualan';
+		protected $allowedFields = ['nama', 'alamat', 'telp', 'tanggal'. 'kecamatan', 'kota_tujuan'];
     	public $nama;
     	public $alamat;
     	public $telp;
@@ -18,12 +18,12 @@ use CodeIgniter\Model;
         {
             if($id === false){
                 $db = \Config\Database::connect();
-                $sql = 'SELECT id_order, nama,alamat,telp,tanggal FROM '.$this->table;
+                $sql = 'SELECT id_penjualan, nama,alamat,telp,tanggal,kecamatan,kota_tujuan FROM '.$this->table;
                 $query = $db->query($sql);
                 $results = $query->getResult();
                 return $results;
             }else{
-                return $this->asArray()->where(['id_order' => $id])->get();
+                return $this->asArray()->where(['id_penjualan' => $id])->get();
             }   
         }
 
@@ -35,14 +35,14 @@ use CodeIgniter\Model;
     
         public function editOrder($data,$id)
         {
-            return $this->db->table($this->table)->update($data, ['id_order' => $id]);
+            return $this->db->table($this->table)->update($data, ['id_penjualan' => $id]);
         }
 
      
         public function deleteOrder($id)
         {
             $builder = $this->db->table($this->table);
-            return $builder->delete(['id_order' => $id]);
+            return $builder->delete(['id_penjualan' => $id]);
         } 
     
       
