@@ -89,6 +89,14 @@
                     </tr>
                     <tr>
                         <th>Total Berat</th>
+                        <?php $temp = fmod ( $tot_berat , 1.0 ) ;
+                                    if ($temp<=0.3){
+                                     $tot_berat = $tot_berat-$temp;
+                                    }
+                                    else{
+                                        $tot_berat = $tot_berat-$temp;
+                                        $tot_berat++;
+                                    }?>
                         <td><?= $tot_berat ?>Kg</td>
                     </tr>
                 </table>

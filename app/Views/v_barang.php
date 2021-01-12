@@ -47,7 +47,8 @@
                 <h4 class="card-title"><a href="product.html" title="View Product"><?=$value['nama_barang']?></a>
                 </h4>
                 <p class="card-text"><?=$value['deskripsi']?></p>
-                <p class="card-text">Stok: <?=$value['stok']?></p>
+                <p class="card-text">Stok: <?=$value['stok']?> PCS</p>
+                <p class="card-text">Berat: <?=$value['berat']?> kg</p>
                 <p class="btn btn-danger btn-block">Rp.
                     <?php echo number_format($value['harga'],0,",",".");?></p>
             </div>

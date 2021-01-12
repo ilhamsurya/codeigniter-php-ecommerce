@@ -59,7 +59,12 @@
                         Total
                         Pembelian:<strong>Rp.<?php echo number_format($invoice->total, 0, ',', '.'); ?></strong><br>
                         Bank: Bank Indonesia<br>
-                        Email: lolmastah@gmail.com
+                        Ongkir:<strong>Rp. <?php echo number_format($invoice->biaya_ongkir, 0, ',', '.'); ?></strong>
+                        <?php
+                        $subtotal =  $invoice->total + $invoice->biaya_ongkir ?>
+                        <br>
+                        Total:<strong>Rp. <?php echo number_format($subtotal, 0, ',', '.'); ?></strong>
+
                     </address>
                 </div>
                 <div class="col-xs-6 text-right">
@@ -73,57 +78,5 @@
     </div>
 
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Order summary</strong></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-condensed">
-                            <thead>
-                                <tr>
-                                    <td><strong>No</strong></td>
-                                    <td class="text-center"><strong>Nama</strong></td>
-                                    <td class="text-center"><strong>Harga</strong></td>
-                                    <td class="text-right"><strong>Jumlah</strong></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- 
-                                <tr>
-                                    <td class="no-line"></td>
-                                    <td class="no-line"></td>
-                                    <td class="no-line text-center"><strong>Shipping</strong></td>
-                                    <td class="no-line text-right">$15</td>
-                                </tr>
-                                <tr>
-                                    <td class="no-line"></td>
-                                    <td class="no-line"></td>
-                                    <td class="no-line text-center"><strong>Total</strong></td>
-                                    <td class="no-line text-right">$685.99</td>
-                                </tr> -->
-
-                                <tr>
-                                    <td><?php echo $transaksi['id'] ?></td>
-                                    <td class="text-center"><?php  echo $transaksi['nama_brg'] ?></td>
-                                    <td class="text-center"><?php echo $transaksi['harga'] ?></td>
-                                    <td class="text-right"><?php echo $transaksi['jml_jual'] ?></td>
-
-                                </tr>
-
-                                <tr>
-                                    <td class="thick-line"></td>
-                                    <td class="thick-line"></td>
-                                    <td class="thick-line text-center"><strong>Grand Total</strong></td>
-                                    <td class="thick-line text-right">Rp. <?= $transaksi['total']  ?></td>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <?= $this->endSection() ?>

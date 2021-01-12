@@ -5,13 +5,16 @@
 <div class="kotak2">
     <?php
 $grand_total = 0;
+$total_berat = 0;
 if ($keranjang = $cart->contents())
     {
         foreach ($keranjang as $item)
             {
                 $grand_total = $grand_total + $item['subtotal'];
+                
             }
         echo "<h4>Total Belanja: Rp.".number_format($grand_total,0,",",".")."</h4>";
+       
 ?>
     <form class="form-horizontal" action="<?php echo base_url('cart/proses_order'); ?>" method="post" name="frmCO"
         id="frmCO">
@@ -45,7 +48,19 @@ if ($keranjang = $cart->contents())
                 <input type="tel" class="form-control" name="kota_tujuan" id="kota_tujuan" placeholder="kota_tujuan">
             </div>
         </div>
-
+        <div class="form-group  has-success has-feedback">
+            <select class="form-control" name="id_ongkir">
+                <option value="">Pilih Ongkos Kirim</option>
+                <?php
+                foreach ($ongkir as $key => $value) {?>
+                <option value="<?php echo $value['id_ongkir'] ?>">
+                    <?php echo $value['kecamatan_pengiriman'] ?> Ke <?php echo $value['kecamatan_tujuan'] ?>
+                    - Rp.<?php echo $value['ongkir_per_kg'] ?></option>
+                <?php
+                }
+                ?>
+            </select>
+        </div>
         <div class="form-group  has-success has-feedback">
             <div class="col-xs-offset-3 col-xs-9">
                 <button type="submit" class="btn btn-primary">Proses Order</button>

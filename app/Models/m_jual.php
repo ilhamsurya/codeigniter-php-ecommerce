@@ -6,12 +6,17 @@ use CodeIgniter\Model;
 
 		protected $table = 'tbl_jual';
 		protected $primaryKey='id';
-		protected $allowedFields = ['id_penjualan','id_brg', 'nama_brg', 'jml_jual', 'total'];
-    	public $id_penjualan;
+		protected $allowedFields = ['id_ongkir','biaya_ongkir','total_ongkir','id_penjualan','id_brg', 'nama_brg', 'jml_jual',
+		'total', 'subberat'];
+        public $id_ongkir;
+         public $total_ongkir;
+        public $biaya_ongkir;
+        public $id_penjualan;
     	public $id_brg;
     	public $nama_brg;
         public $jml_jual;
         public $total;
+        public $subberat;
 
 
         
@@ -19,7 +24,7 @@ use CodeIgniter\Model;
         {
             if($id === false){
                 $db = \Config\Database::connect();
-                $sql = 'SELECT id_penjualan,id_brg,nama_brg,jml_jual,total FROM '.$this->table;
+                $sql = 'SELECT id_penjualan,id_ongkir,id_brg,nama_brg,jml_jual,total,subberat,biaya_ongkir,total_ongkir FROM '.$this->table;
                 $query = $db->query($sql);
                 $results = $query->getResult();
                 return $results;
@@ -28,6 +33,10 @@ use CodeIgniter\Model;
             }   
         }
 
+        public function getOne($id)
+        {
+            return $this->find($id);
+        }
         
 
         public function saveInvoice($data)
