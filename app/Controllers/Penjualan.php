@@ -6,7 +6,8 @@ use App\Models\m_jual;
 use App\Models\m_ongkir;
 use App\Models\m_penjualan;
 
-class Cart extends BaseController{
+
+class Penjualan extends BaseController{
 	 
 
       public function keranjang()
@@ -102,6 +103,38 @@ class Cart extends BaseController{
 
        }
 
+           public function exportPDF()
+           {
+           $ModelBarang= new m_penjualan();
+           $data = [
+           'title' => 'Invoice',
+           'order' => $ModelBarang->getOrder(),
+           ];
+           return view('v_laporan_pdf.php', $data);
+
+           }
+
+           public function export()
+           {
+           $ModelBarang= new m_penjualan();
+           $data = [
+           'title' => 'Invoice',
+           'order' => $ModelBarang->getOrder(),
+           ];
+           return view('v_penjualan_excel.php', $data);
+
+           }
+
+           public function export_excel()
+           {
+           $ModelBarang= new m_penjualan();
+           $data = [
+           'title' => 'Invoice',
+           'order' => $ModelBarang->getOrder(),
+           ];
+           return view('v_export_excel.php', $data);
+
+           }
       
       
 

@@ -1,4 +1,4 @@
-<?= $this->extend('v_template') ?>
+<?= $this->extend('v_template2') ?>
 
 <?= $this->section('content') ?>
 
@@ -6,14 +6,18 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-
+<style>
+    @media print {
+        #printPageButton {
+            display: none;
+        }
+    }
+</style>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <div class="container">
 
-    <a class="btn btn-danger" href="/cart/exportPDF/">PDF</a>
-    <a class="btn btn-success" href="/cart/export/">EXCEL</a>
     <div class="row">
         <table class="table table-striped">
             <tr>
@@ -23,7 +27,7 @@
                 <th>Total Penjualan</th>
                 <th>Total Ongkir</th>
                 <th>Tanggal Pemesanan</th>
-                <th>Aksi</th>
+
 
             </tr>
             <?php  foreach ($order as $no => $value) { ?>
@@ -51,10 +55,7 @@
                 <?=$value->tanggal?>
 
             </td>
-            <td>
-                <a class="btn btn-primary" href="/cart/detail/<?=$value->id_penjualan?>">View</a>
 
-            </td>
 
             <td>
 
@@ -63,6 +64,7 @@
             <?php  $no++;} ?>
         </table>
     </div>
+    <button class="btn btn-danger" id="printPageButton" onClick="window.print()">PDF</button>
 </div>
 
 

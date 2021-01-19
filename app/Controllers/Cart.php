@@ -5,6 +5,8 @@ use App\Models\m_barang;
 use App\Models\m_jual;
 use App\Models\m_ongkir;
 use App\Models\m_penjualan;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Cart extends BaseController{
 	 
@@ -61,7 +63,7 @@ class Cart extends BaseController{
             $model2->saveInvoice($data_detail); 
             
             //-------------------------Update Stok Barang-----------------------
-
+            $totalsemua = $cart->total();
             $productStock = $db->table('barang')->where('id_barang', $productId)->get()->getRowArray();
             $nowStock = $productStock['stok'] - $productQty;
             $db->query("UPDATE barang SET stok = '$nowStock' where id_barang = '$productId'");
@@ -76,6 +78,8 @@ class Cart extends BaseController{
             }
             $tot_ongkir = ($tot_berat * $biaya_ongkir);
             $db->query("UPDATE tbl_jual SET biaya_ongkir = '$tot_ongkir' where id_penjualan = '$order_id'");
+            $db->query("UPDATE tbl_penjualan SET total_ongkir = '$tot_ongkir' where id_penjualan = '$order_id'");
+            $db->query("UPDATE tbl_penjualan SET total = '$totalsemua' where id_penjualan = '$order_id'");
             }
             //-------------------------Hapus shopping cart--------------------------
             $cart->destroy();
@@ -105,6 +109,39 @@ class Cart extends BaseController{
 
        }
 
+       public function exportPDF()
+       {
+       $ModelBarang= new m_penjualan();
+       $data = [
+       'title' => 'Invoice',
+       'order' => $ModelBarang->getOrder(),
+       ];
+       return view('v_laporan_pdf.php', $data);
+
+       }
+
+        public function export()
+         {
+         $ModelBarang= new m_penjualan();
+         $data = [
+         'title' => 'Invoice',
+         'order' => $ModelBarang->getOrder(),
+         ];
+         return view('v_penjualan_excel.php', $data);
+
+         }
+
+           public function export_excel()
+           {
+           $ModelBarang= new m_penjualan();
+           $data = [
+           'title' => 'Invoice',
+           'order' => $ModelBarang->getOrder(),
+           ];
+           return view('v_export_excel.php', $data);
+
+           }
+
       public function detail($id_order)
        {
          $model = new m_penjualan();
@@ -130,8 +167,7 @@ class Cart extends BaseController{
 
        }
 
-      
-      
+    
 
 	
 	

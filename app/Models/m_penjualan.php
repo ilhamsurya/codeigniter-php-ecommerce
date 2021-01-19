@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 		protected $table = 'tbl_penjualan';
 		protected $primaryKey='id_penjualan';
-		protected $allowedFields = ['nama', 'alamat', 'telp', 'tanggal'. 'kecamatan', 'kota_tujuan'];
+		protected $allowedFields = ['nama', 'alamat', 'telp', 'tanggal'. 'kecamatan', 'kota_tujuan', 'total_ongkir', 'total'];
     	public $nama;
     	public $alamat;
     	public $telp;
@@ -18,7 +18,7 @@ use CodeIgniter\Model;
         {
             if($id === false){
                 $db = \Config\Database::connect();
-                $sql = 'SELECT id_penjualan, nama,alamat,telp,tanggal,kecamatan,kota_tujuan FROM '.$this->table;
+                $sql = 'SELECT id_penjualan, nama,alamat,telp,tanggal,kecamatan,kota_tujuan,total_ongkir,total  FROM '.$this->table;
                 $query = $db->query($sql);
                 $results = $query->getResult();
                 return $results;

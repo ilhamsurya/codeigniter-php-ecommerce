@@ -1,82 +1,65 @@
-<?= $this->extend('v_template') ?>
+<?= $this->extend('v_template2') ?>
 
 <?= $this->section('content') ?>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-<style>
-    .invoice-title h2,
-    .invoice-title h3 {
-        display: inline-block;
-    }
 
-    .table>tbody>tr>.no-line {
-        border-top: none;
-    }
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    .table>thead>tr>.no-line {
-        border-bottom: none;
-    }
-
-    .table>tbody>tr>.thick-line {
-        border-top: 2px solid;
-    }
-</style>
 <div class="container">
+
     <div class="row">
-        <div class="col-xs-12">
-            <div class="invoice-title">
-                <h2>Invoice</h2>
-                <h3 class="pull-right"><?=$order->id_penjualan ?></h3>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-xs-6">
-                    <address>
-                        <strong>Tagihan Kepada:</strong><br>
-                        Nama: <?=$order->nama ?><br>
-                        Alamat: <?=$order->alamat ?><br>
-                        HP: <?=$order->telp ?><br>
+        <table class="table table-striped">
+            <tr>
+                <th>Id Invoice</th>
+                <th>Nama Pemesan</th>
+                <th>Alamat Pengiriman</th>
+                <th>Total Penjualan</th>
+                <th>Total Ongkir</th>
+                <th>Tanggal Pemesanan</th>
+                <th>Aksi</th>
 
-                    </address>
-                </div>
-                <div class="col-xs-6 text-right">
-                    <address>
-                        <strong>Akan Dikirim Kepada:</strong><br>
-                        Nama: <?=$order->nama ?><br>
-                        Kecamatan: <?=$order->kecamatan ?><br>
-                        Kota tujuan: <?=$order->kota_tujuan ?><br>
+            </tr>
+            <?php  foreach ($order as $no => $value) { ?>
+
+            <td>
+                <?=$value->id_penjualan?>
+            </td>
+            <td>
+                <?=$value->nama?>
+
+            </td>
+            <td>
+                <?=$value->alamat?>
+
+            </td>
+            <td>
+                <?=$value->total?>
+
+            </td>
+            <td>
+                <?=$value->total_ongkir?>
+
+            </td>
+            <td>
+                <?=$value->tanggal?>
+
+            </td>
 
 
-                    </address>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <address>
-                        <strong>Metode Pembayaran</strong><br>
-                        Total
-                        Pembelian:<strong>Rp.<?php echo number_format($invoice->total, 0, ',', '.'); ?></strong><br>
-                        Bank: Bank Indonesia<br>
-                        Ongkir:<strong>Rp. <?php echo number_format($invoice->biaya_ongkir, 0, ',', '.'); ?></strong>
-                        <?php
-                        $subtotal =  $invoice->total + $invoice->biaya_ongkir ?>
-                        <br>
-                        Total:<strong>Rp. <?php echo number_format($subtotal, 0, ',', '.'); ?></strong>
+            <td>
 
-                    </address>
-                </div>
-                <div class="col-xs-6 text-right">
-                    <address>
-                        <strong>Order Date:</strong><br>
-                        <?=$order->tanggal ?><br><br>
-                    </address>
-                </div>
-            </div>
-        </div>
+            </td>
+            </tr>
+            <?php  $no++;} ?>
+        </table>
     </div>
-
-
 </div>
+
+
+
 <?= $this->endSection() ?>
