@@ -1,22 +1,103 @@
 <?php
 namespace App\Controllers;
-
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 use App\Models\m_mahasiswa;
 
 	class Mahasiswa extends BaseController{
+		 protected $helpers = [];
 		public function __construct() {
 
-		
+		  helper(['form']);
 			$this->model = new m_mahasiswa();
 	
 		}
+		
+    public function import()
+    {
+
+        echo view('v_import_mahasiswa');
+	}
+	public function grafik()
+    {
+    	$model = new m_mahasiswa;
+		$chart['grafik'] = $model->getGrafik();
+        echo view('v_lihat_grafik',$chart);
+    }
+public function proses_import()
+{
+	 	$model = new m_mahasiswa;
+    $validation =  \Config\Services::validation();
+ 
+    $file = $this->request->getFile('trx_file');
+ 
+    $data = array(
+        'trx_file'           => $file,
+    );
+ 
+    if($validation->run($data, 'mahasiswa') == FALSE){
+ 
+        session()->setFlashdata('errors', $validation->getErrors());
+        return redirect()->to(base_url('mahasiswa/import'));
+     
+    } else {
+ 
+        // ambil extension dari file excel
+        $extension = $file->getClientExtension();
+         
+        // format excel 2007 ke bawah
+        if('xls' == $extension){
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+        // format excel 2010 ke atas
+        } else {
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        }
+         
+        $spreadsheet = $reader->load($file);
+        $data = $spreadsheet->getActiveSheet()->toArray();
+ 
+        foreach($data as $idx => $row){
+             
+            // lewati baris ke 0 pada file excel
+            // dalam kasus ini, array ke 0 adalahpara title
+            if($idx == 0) {
+                continue;
+            }
+             
+            // get product_id from excel
+            $nim     = $row[0];
+            // get trx_date from excel
+            $nama       = $row[1];
+          	// get trx_date from excel
+			  $umur = $row[2];
+			  	// get trx_date from excel
+         	 $tinggi = $row[3];
+ 
+            $data = [
+                "nim" => $nim,
+                "nama" => $nama,
+				"umur" => $umur,
+				"tinggi" => $tinggi
+            ];
+   			 $simpan = 	$model->saveMahasiswa($data);
+          
+        }
+      
+      	if($simpan)
+        {
+            session()->setFlashdata('success', 'Imported mahasiswa successfully');
+            return redirect()->to(base_url('mahasiswa')); 
+        }
+    }
+}
+	
 		public function index()
 		{
 			$mhsModel= new m_mahasiswa();
 			$data = [
             'title' => 'Tugas Nomor 3',
-            'mahasiswa' => $mhsModel->paginate(2),
+            'mahasiswa' => $mhsModel->paginate(10),
             'pager' => $mhsModel->pager
         ];
         return view('v_mahasiswa',$data);

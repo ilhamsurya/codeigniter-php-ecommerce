@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 		protected $table = 'mahasiswa';
 		protected $primaryKey='id_mahasiswa';
-		protected $allowedFields = ['nim', 'nama', 'umur', 'foto'];
+		protected $allowedFields = ['nim', 'nama', 'umur', 'foto', 'tinggi'];
     	public $nim;
     	public $nama;
     	public $umur;
@@ -18,7 +18,7 @@ use CodeIgniter\Model;
         {
             if($id === false){
                 $db = \Config\Database::connect();
-                $sql = 'SELECT nim,nama,umur  FROM '.$this->table;
+                $sql = 'SELECT nim,nama,umur,tinggi  FROM '.$this->table;
                 $query = $db->query($sql);
                 $results = $query->getResult();
                 return $results;
@@ -39,7 +39,17 @@ use CodeIgniter\Model;
         {
             return $this->db->table($this->table)->update($data, ['nim' => $id]);
         }
-
+        public function getGrafik()
+        {
+        $query = $this->db->query("SELECT nim,nama,umur,tinggi FROM  mahasiswa");
+        $hasil = [];
+        if(!empty($query)){
+        foreach($query->getResultArray() as $data) {
+        $hasil[] = $data;
+        }
+        }
+        return $hasil;
+        }
      
         public function deleteMahasiswa($id)
         {
