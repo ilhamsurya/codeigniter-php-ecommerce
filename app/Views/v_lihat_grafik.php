@@ -15,7 +15,7 @@ foreach($grafik as $data){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="m-0">Grafik Tinggi Mahasiswa</h5>

@@ -9,7 +9,8 @@ use App\Models\m_mahasiswa;
 		 protected $helpers = [];
 		public function __construct() {
 
-		  helper(['form']);
+			helper(['form']);
+			$this->form_validation = \Config\Services::validation();
 			$this->model = new m_mahasiswa();
 	
 		}
@@ -70,7 +71,7 @@ public function proses_import()
             // get trx_date from excel
             $nama       = $row[1];
           	// get trx_date from excel
-			  $umur = $row[2];
+			$umur = $row[2];
 			  	// get trx_date from excel
          	 $tinggi = $row[3];
  
@@ -91,13 +92,78 @@ public function proses_import()
         }
     }
 }
+
+public function proses_import_lokal()
+{
+	$model = new m_mahasiswa;
+    $validation =  \Config\Services::validation();
+ 
+    $file = $this->request->getFile('trx_file');
+ 
+    $data = array(
+        'trx_file'           => $file,
+    );
+ 
+    if($validation->run($data, 'mahasiswa') == FALSE){
+ 
+        session()->setFlashdata('errors', $validation->getErrors());
+        return redirect()->to(base_url('mahasiswa/import'));
+     
+    } else {
+ 
+        // ambil extension dari file excel
+        $extension = $file->getClientExtension();
+         
+        // format excel 2007 ke bawah
+        if('xls' == $extension){
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+        // format excel 2010 ke atas
+        } else {
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        }
+         
+        $spreadsheet = $reader->load($file);
+        $data = $spreadsheet->getActiveSheet()->toArray();
+ 		$Mahasiswa = array();
+        foreach($data as $idx => $row){
+             
+            // lewati baris ke 0 pada file excel
+            // dalam kasus ini, array ke 0 adalahpara title
+            if($idx == 0) {
+                continue;
+            }
+             
+            // get product_id from excel
+            $nim     = $row[0];
+            // get trx_date from excel
+            $nama       = $row[1];
+          	// get trx_date from excel
+			$umur = $row[2];
+			  	// get trx_date from excel
+         	 $tinggi = $row[3];
+ 
+            $data = [
+                "nim" => $nim,
+                "nama" => $nama,
+				"umur" => $umur,
+				"tinggi" => $tinggi
+			];
+			array_push($Mahasiswa,$data);
+        }
+      	$_SESSION['datasementara'] = $Mahasiswa;
+        return redirect()->to(base_url('mahasiswa')); 
+      
+    }
+}
 	
 		public function index()
 		{
 			$mhsModel= new m_mahasiswa();
+		
 			$data = [
             'title' => 'Tugas Nomor 3',
-            'mahasiswa' => $mhsModel->paginate(10),
+			'mahasiswa' => $mhsModel->paginate(10),
+			'grafik' => $mhsModel->getGrafik(),
             'pager' => $mhsModel->pager
         ];
         return view('v_mahasiswa',$data);
@@ -115,13 +181,25 @@ public function proses_import()
 				'nama' => $this->request->getVar('nama'),
 				'umur' => $this->request->getVar('umur'),
 				'nim'  => $this->request->getVar('nim'),
+				'email' => $this->request->getVar('email'),
+				'hobby' => $this->request->getVar('hobby'),
+				'pendidikan' => $this->request->getVar('pendidikan'),
+				'jeniskelamin' => $this->request->getVar('jk'),
 		
 			);
-			$model->saveMahasiswa($data);
-			echo '<script>
-					alert("Sukses Tambah Data Mahasiswa");
-					window.location="'.base_url('mahasiswa').'"
-				</script>';
+			 if($this->form_validation->run($data, 'register') == FALSE){
+			 // mengembalikan nilai input yang sudah dimasukan sebelumnya
+			 session()->setFlashdata('inputs', $this->request->getPost());
+			 // memberikan pesan error pada saat input data
+			 session()->setFlashdata('errors', $this->form_validation->getErrors());
+			 // kembali ke halaman form
+			 return redirect()->to(base_url('mahasiswa/tambah'));
+			 } else {
+			 //$model->saveMahasiswa($data);
+			 session()->setFlashdata('success', 'Registration successfully');
+			 // kembali ke halaman register
+			 return redirect()->to(base_url('mahasiswa/tambah'));
+			 }
 	
 		}
 			

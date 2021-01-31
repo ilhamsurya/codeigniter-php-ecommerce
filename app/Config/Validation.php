@@ -29,7 +29,51 @@ class Validation
 		'list'   => 'CodeIgniter\Validation\Views\list',
 		'single' => 'CodeIgniter\Validation\Views\single',
 	];
+	public $register = [
+		'nama' => 'required|alpha',
+		'nim' => 'required|alpha_numeric|min_length[9]|max_length[9]',
+		'email' => 'required|valid_email',
+		'hobby' => 'required',
+		'pendidikan' => 'required',
+		'umur' => 'numeric|required',
+		'jeniskelamin' => 'required',
+		
+	];
+	
+	public $register_errors = [
+		'nim' => [
+			'required'      => 'nim wajib diisi',
+			'alpha_numeric' => 'nim hanya boleh diisi dengan huruf dan angka',
+			'min_length'    => 'nim minimal terdiri dari 9 karakter',
+			'max_length'    => 'nim maksimal terdiri dari 9 karakter'
+		],
+		'nama' => [
+			'required'          => 'Nama wajib diisi',
+			'alpha' 			=> 'Nama hanya boleh menggunakan huruf'
+		],
+		'hobby' => [
+		'required' => 'hobby wajib diisi',
+	
+		],
+		'pendidikan' => [
+		'required' => 'pendidikan wajib diisi',
+	
+		],
+		'umur' => [
+			'numeric' => 'umur wajib angka',
+			'required' => 'pendidikan wajib diisi',
+	
+		],
+		'jeniskelamin' => [
+		'required' => 'jeniskelamin wajib diisi',
+	
+		],
+		'email' => [
+			'required'          => 'Email wajib diisi',
+			'email.valid_email' => 'Email tidak valid',
+		],
 
+	];
 	public $mahasiswa = [
 	'trx_file' => 'uploaded[trx_file]|ext_in[trx_file,xls,xlsx]|max_size[trx_file,1000]',
 	];
