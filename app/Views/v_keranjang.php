@@ -22,7 +22,7 @@
         <div class="col-xs-12">
             <h2 class="page-header">
                 <i class="fa fa-shopping-cart"></i> Keranjang Anda
-                <small class="pull-right">Date: </small>
+
             </h2>
         </div>
         <!-- /.col -->

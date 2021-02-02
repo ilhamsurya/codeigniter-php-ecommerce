@@ -79,11 +79,12 @@
             </div>
             <div class="form-group">
                 <label for="hobby">Hobby</label><br>
-                <label class="checkbox-inline"><input type="checkbox" value="main game"> Main Game </label><br>
-                <label class="checkbox-inline"><input type="checkbox" value="nonton"> Nonton </label><br>
-                <label class="checkbox-inline"><input type="checkbox" value="makan"> Makan </label><br>
-                <label class="checkbox-inline"><input type="checkbox" value="musik"> Musik </label><br>
-                <label class="checkbox-inline"><input type="checkbox" value="olahraga"> Olahraga </label>
+                <label class="checkbox-inline"><input type="checkbox" value="main game" name="hobby"> Main Game
+                </label><br>
+                <label class="checkbox-inline"><input type="checkbox" value="hobby" name="hobby"> Nonton </label><br>
+                <label class="checkbox-inline"><input type="checkbox" value="hobby" name="hobby"> Makan </label><br>
+                <label class="checkbox-inline"><input type="checkbox" value="hobby" name="hobby"> Musik </label><br>
+                <label class="checkbox-inline"><input type="checkbox" value="hobby" name="hobby"> Olahraga </label>
             </div>
             <div class="form-group">
                 <label for="">Foto Mahasiswa</label>

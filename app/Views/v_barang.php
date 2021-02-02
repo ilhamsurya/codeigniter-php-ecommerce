@@ -9,7 +9,50 @@
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<style>
+    .card {
+        border-radius: 0 !important;
+        border: 0 none;
+        -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+        margin-left: 1px;
+        margin-right: 1px;
+    }
 
+    .card-img-top {
+        width: 100%;
+        border-radius: 0 !important;
+    }
+
+    .card-columns {
+        padding-top: 15px;
+    }
+
+    @media (min-width: 576px) {
+        .card-columns {
+            column-count: 2;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .card-columns {
+            column-count: 3;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .card-columns {
+            column-count: 4;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .card-columns {
+            column-count: 5;
+        }
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -29,9 +72,10 @@
 </div>
 <div class="container">
     <div class="row">
+
         <?php foreach ($barang as $key => $value) {?>
 
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-md-3 col-6">
             <?php
                      echo form_open('barang/beli');
                      echo form_hidden('id', $value['id_barang']);

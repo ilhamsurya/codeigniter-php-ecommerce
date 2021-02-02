@@ -30,8 +30,8 @@ class Validation
 		'single' => 'CodeIgniter\Validation\Views\single',
 	];
 	public $register = [
-		'nama' => 'required|alpha',
-		'nim' => 'required|alpha_numeric|min_length[9]|max_length[9]',
+		'nama' => 'required|trim|alpha_space',
+		'nim' => 'required|numeric|min_length[9]|max_length[9]',
 		'email' => 'required|valid_email',
 		'hobby' => 'required',
 		'pendidikan' => 'required',
@@ -43,13 +43,13 @@ class Validation
 	public $register_errors = [
 		'nim' => [
 			'required'      => 'nim wajib diisi',
-			'alpha_numeric' => 'nim hanya boleh diisi dengan huruf dan angka',
+			'numeric' => 'nim hanya boleh diisi dengan huruf dan angka',
 			'min_length'    => 'nim minimal terdiri dari 9 karakter',
 			'max_length'    => 'nim maksimal terdiri dari 9 karakter'
 		],
 		'nama' => [
 			'required'          => 'Nama wajib diisi',
-			'alpha' 			=> 'Nama hanya boleh menggunakan huruf'
+			'alpha_space' => 'Nama hanya boleh menggunakan huruf'
 		],
 		'hobby' => [
 		'required' => 'hobby wajib diisi',
